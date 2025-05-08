@@ -31,6 +31,10 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
   pod 'PhoneNumberKit', '~> 3.7.4'
+  # Fix Firebase and use_frameworks! conflict
+  pod 'Firebase/Core', :modular_headers => false
+  pod 'FirebaseMessaging', :modular_headers => false
+
 
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))

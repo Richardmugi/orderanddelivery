@@ -30,7 +30,7 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  pod 'PhoneNumberKit', '~> 2.0'
+  pod 'PhoneNumberKit', '~> 3.7.4'
 
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))

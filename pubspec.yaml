@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 # flutter pub upgrade --major-versions
-version: 4.9.0+01
+version: 4.9.0+02
 
 environment:
   sdk: ^3.5.0
@@ -117,10 +117,11 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
 
 
-flutter_icons:
-  android: true
+flutter_launcher_icons:
+  android: "launcher_icon"
   ios: true
-  image_path: "assets/app_logo.png"
+  image_path: "assets/orderdeliver.png"
+  min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -134,6 +135,7 @@ flutter:
     - assets/htmls/
     - assets/fonts/
     - dummy_assets/
+    - shorebird.yaml
   fonts:
     - family: PublicSansSerif
       fonts:

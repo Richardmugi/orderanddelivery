@@ -39,7 +39,7 @@ class FeaturedProductHorizontalListWidget extends StatelessWidget {
       return SingleChildScrollView(
         child: Container(
           height: 251,
-          color: Colors.green,
+          color: Colors.white,
           child: NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
               if (scrollInfo.metrics.pixels ==

@@ -114,11 +114,24 @@ class _CheckoutState extends State<Checkout> {
       balance = widget.rechargeAmount.toString();
     }
 
-    setState(() {
-      _grandTotalValue = double.parse(balance!);
-    });
-    print("balance: $balance");
-    return balance!;
+    // cleaning the string before parsing
+    if (balance != null) {
+      String cleanedBalance = balance.replaceAll(RegExp(r'[^\d.]'), '').trim();
+      try {
+        _grandTotalValue = double.parse(cleanedBalance);
+      } catch (e) {
+        print("error parsing balance: $balance");
+        // _grandTotalValue = 0.0;
+      }
+    } else {
+      _grandTotalValue = 0.0;
+    }
+
+    // setState(() {
+    //   _grandTotalValue = double.parse(balance!);
+    // });
+    // print("balance: $balance");
+    return balance ?? "0.0";
   }
 
   fetchAll() {
@@ -1090,30 +1103,32 @@ class _CheckoutState extends State<Checkout> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Btn.minWidthFixHeight(
-              minWidth: MediaQuery.of(context).size.width,
-              height: 50,
-              color: MyTheme.accent_color,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
+            Expanded(
+              child: Btn.minWidthFixHeight(
+                minWidth: MediaQuery.of(context).size.width,
+                height: 50,
+                color: MyTheme.accent_color,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0.0),
+                ),
+                child: Text(
+                  widget.paymentFor == PaymentFor.WalletRecharge
+                      ? AppLocalizations.of(context)!.recharge_wallet_ucf
+                      : widget.paymentFor == PaymentFor.ManualPayment
+                          ? AppLocalizations.of(context)!.proceed_all_caps
+                          : widget.paymentFor == PaymentFor.PackagePay
+                              ? AppLocalizations.of(context)!.buy_package_ucf
+                              : AppLocalizations.of(context)!
+                                  .place_my_order_all_capital,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                onPressed: () {
+                  onPressPlaceOrderOrProceed();
+                },
               ),
-              child: Text(
-                widget.paymentFor == PaymentFor.WalletRecharge
-                    ? AppLocalizations.of(context)!.recharge_wallet_ucf
-                    : widget.paymentFor == PaymentFor.ManualPayment
-                        ? AppLocalizations.of(context)!.proceed_all_caps
-                        : widget.paymentFor == PaymentFor.PackagePay
-                            ? AppLocalizations.of(context)!.buy_package_ucf
-                            : AppLocalizations.of(context)!
-                                .place_my_order_all_capital,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-              onPressed: () {
-                onPressPlaceOrderOrProceed();
-              },
             )
           ],
         ),

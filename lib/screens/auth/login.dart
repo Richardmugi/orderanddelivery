@@ -158,7 +158,7 @@ class _LoginState extends State<Login> {
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
-        context.push("/");
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Main()));
       } else {
         if ((mail_verification_status.$ && _login_by == "email") ||
             (mail_verification_status.$ && _login_by == "phone")) {

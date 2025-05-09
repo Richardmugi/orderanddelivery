@@ -28,9 +28,9 @@ require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelpe
 flutter_ios_podfile_setup
 
 target 'Runner' do
-  #use_frameworks!
+  use_frameworks!
   #use_modular_headers!
-  #pod 'PhoneNumberKit', '~> 3.7.4'
+  pod 'PhoneNumberKit', '~> 3.7.4'
   # Fix Firebase and use_frameworks! conflict
   #pod 'Firebase/Core', :modular_headers => false
   #pod 'FirebaseMessaging', :modular_headers => false
@@ -46,5 +46,10 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # Firebase header issue workaround:
+    target.build_configurations.each do |config|
+      config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+    end
   end
 end

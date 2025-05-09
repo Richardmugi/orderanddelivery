@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Index extends StatefulWidget {
-  Index({super.key, this.goBack = true});
-  bool? goBack;
+  const Index({Key? key, this.goBack = false}) : super(key: key);
+  final bool goBack;
 
   @override
   State<Index> createState() => _IndexState();

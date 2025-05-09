@@ -169,7 +169,8 @@ class _LoginState extends State<Login> {
                 );
           }));
         } else {
-          context.push("/");
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Main()));
+          //context.push("/");
         }
       }
     }

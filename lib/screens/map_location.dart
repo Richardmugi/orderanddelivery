@@ -19,7 +19,7 @@ import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 
 class MapLocation extends StatefulWidget {
   MapLocation({Key? key, this.address}) : super(key: key);
-  var address;
+  final address;
 
   @override
   State<MapLocation> createState() => MapLocationState();

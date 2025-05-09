@@ -17,8 +17,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class Main extends StatefulWidget {
-  Main({Key? key, go_back = true}) : super(key: key);
-  late bool go_back;
+  Main({Key? key, this.go_back = false}) : super(key: key);
+  final bool go_back;
 
   @override
   _MainState createState() => _MainState();
@@ -131,7 +131,6 @@ class _MainState extends State<Main> {
       return shouldPop;
     }
     return Future.value(false);
-    return widget.go_back;
   }
 
   @override

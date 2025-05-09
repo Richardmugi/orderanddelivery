@@ -20,7 +20,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class SellerDetails extends StatefulWidget {
-  String slug;
+  final String slug;
 
   SellerDetails({Key? key, required this.slug}) : super(key: key);
 

@@ -24,12 +24,12 @@ class Home extends StatefulWidget {
     Key? key,
     this.title,
     this.show_back_button = false,
-    go_back = true,
+    this.go_back = false,
   }) : super(key: key);
 
   final String? title;
-  bool show_back_button;
-  late bool go_back;
+  final bool show_back_button;
+  final bool go_back;
 
   @override
   _HomeState createState() => _HomeState();

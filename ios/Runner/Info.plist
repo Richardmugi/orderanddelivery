@@ -18,7 +18,7 @@
 	<string>6.0</string>
 
 	<key>CFBundleName</key>
-	<string>Order & Delivery</string>
+	<string>Active Ecommerce Flutter App</string>
 
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
@@ -57,7 +57,7 @@
     <string></string>
 
     <key>FacebookDisplayName</key>
-    <string>Order And Delivery</string>
+    <string>Active Ecommerce</string>
 
 	<key>LSApplicationCategoryType</key>
 	<string></string>

@@ -28,11 +28,12 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:twitter_login/twitter_login.dart';
+//import 'package:twitter_login/twitter_login.dart';
 
 import '../../custom/loading.dart';
 import '../../repositories/address_repository.dart';
 import 'otp.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _LoginState extends State<Login> {
   onPressedLogin(ctx) async {
     FocusScope.of(context).unfocus();
 
-    Loading.show(context);
+    //Loading.show(context);
     var email = _emailController.text.toString();
     var password = _passwordController.text.toString();
 
@@ -101,7 +102,8 @@ class _LoginState extends State<Login> {
 
     var loginResponse = await AuthRepository().getLoginResponse(
         _login_by == 'email' ? email : _phone, password, _login_by);
-    Loading.close();
+        print("Login response: $loginResponse");
+    //Loading.close();
 
     // empty temp user id after logged in
     temp_user_id.$ = "";
@@ -257,7 +259,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  onPressedTwitterLogin() async {
+  /*onPressedTwitterLogin() async {
     try {
       final twitterLogin = new TwitterLogin(
           apiKey: SocialConfig().twitter_consumer_key,
@@ -296,7 +298,7 @@ class _LoginState extends State<Login> {
       print("error is ....... $e");
       // TODO
     }
-  }
+  }*/
 
   String generateNonce([int length = 32]) {
     final charset =
@@ -387,7 +389,7 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   _login_by == "email"
@@ -396,8 +398,8 @@ class _LoginState extends State<Login> {
                   style: TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
-              ),
-              if (_login_by == "email")
+              ),*/
+              /*if (_login_by == "email")
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Column(
@@ -595,7 +597,7 @@ class _LoginState extends State<Login> {
                     }));
                   },
                 ),
-              ),
+              ),*/
               if (Platform.isIOS)
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
@@ -617,6 +619,50 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
+  padding: const EdgeInsets.only(top: 10.0),
+  child: SizedBox(
+    width: double.infinity,
+    height: 48, // same height as Apple button
+    child: SignInButton(
+      Buttons.google,
+      onPressed: onPressedGoogleLogin,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8), // match Apple button radius
+      ),
+    ),
+  ),
+),
+Padding(
+  padding: const EdgeInsets.only(top: 10.0),
+child: SizedBox(
+  width: double.infinity,
+  height: 48,
+  child: SignInButton(
+    Buttons.facebookNew,
+    onPressed: onPressedFacebookLogin,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+  ),
+),
+),
+
+/*Padding(
+  padding: const EdgeInsets.only(top: 10.0),
+child: SizedBox(
+  width: double.infinity,
+  height: 48,
+  child: SignInButton(
+    Buttons.twitter,
+    onPressed: onPressedTwitterLogin,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+  ),
+),
+),*/
+
+              /*Padding(
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Center(
                   child: Container(
@@ -681,7 +727,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-              ),
+              ),*/
             ],
           ),
         )

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
+//import 'dart:io' show Platform;
 import 'dart:math';
 
 import 'package:active_ecommerce_flutter/app_config.dart';
@@ -20,6 +20,7 @@ import 'package:active_ecommerce_flutter/social_config.dart';
 import 'package:active_ecommerce_flutter/ui_elements/auth_ui.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -223,7 +224,7 @@ class _LoginState extends State<Login> {
 
   onPressedGoogleLogin() async {
     try {
-      final GoogleSignInAccount googleUser = (await GoogleSignIn().signIn())!;
+      final GoogleSignInAccount googleUser = (await GoogleSignIn(scopes: ['email'],).signIn())!;
 
       print(googleUser.toString());
 
@@ -236,7 +237,7 @@ class _LoginState extends State<Login> {
       // print("googleUser.id ${googleUser.id}");
 
       var loginResponse = await AuthRepository().getSocialLoginResponse(
-          "google", googleUser.displayName, googleUser.email, googleUser.id,
+          "google", null, googleUser.email, googleUser.id,
           access_token: accessToken);
 
       if (loginResponse.result == false) {
@@ -258,6 +259,7 @@ class _LoginState extends State<Login> {
       // TODO
     }
   }
+
 
   /*onPressedTwitterLogin() async {
     try {
@@ -399,8 +401,8 @@ class _LoginState extends State<Login> {
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
               ),*/
-              /*if (_login_by == "email")
-                Padding(
+              //if (_login_by == "email")
+                /*Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -433,8 +435,8 @@ class _LoginState extends State<Login> {
                           : Container()
                     ],
                   ),
-                )
-              else
+                )*/
+              /*else
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Column(
@@ -491,16 +493,16 @@ class _LoginState extends State<Login> {
                       )
                     ],
                   ),
-                ),
-              Padding(
+                ),*/
+              /*Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
                   style: TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
-              ),
-              Padding(
+              ),*/
+              /*Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -535,8 +537,8 @@ class _LoginState extends State<Login> {
                     )
                   ],
                 ),
-              ),
-              Padding(
+              ),*/
+              /*Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Container(
                   height: 45,
@@ -564,7 +566,41 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 ),
+              ),*/
+              //if (Platform.isIOS)
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SignInWithAppleButton(
+                    onPressed: () async {
+                      signInWithApple();
+                    },
+                  ),
+                ),
+              /*Visibility(
+                visible: allow_google_login.$ || allow_facebook_login.$,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Center(
+                      child: Text(
+                    AppLocalizations.of(context)!.login_screen_login_with,
+                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                  )),
+                ),
               ),
+              Padding(
+  padding: const EdgeInsets.only(top: 10.0),
+  child: SizedBox(
+    width: double.infinity,
+    height: 48, // same height as Apple button
+    child: SignInButton(
+      Buttons.google,
+      onPressed: onPressedGoogleLogin,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8), // match Apple button radius
+      ),
+    ),
+  ),
+),*/
               Padding(
                 padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                 child: Center(
@@ -597,42 +633,8 @@ class _LoginState extends State<Login> {
                     }));
                   },
                 ),
-              ),*/
-              if (Platform.isIOS)
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: SignInWithAppleButton(
-                    onPressed: () async {
-                      signInWithApple();
-                    },
-                  ),
-                ),
-              Visibility(
-                visible: allow_google_login.$ || allow_facebook_login.$,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Center(
-                      child: Text(
-                    AppLocalizations.of(context)!.login_screen_login_with,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                  )),
-                ),
               ),
-              Padding(
-  padding: const EdgeInsets.only(top: 10.0),
-  child: SizedBox(
-    width: double.infinity,
-    height: 48, // same height as Apple button
-    child: SignInButton(
-      Buttons.google,
-      onPressed: onPressedGoogleLogin,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8), // match Apple button radius
-      ),
-    ),
-  ),
-),
-Padding(
+/*Padding(
   padding: const EdgeInsets.only(top: 10.0),
 child: SizedBox(
   width: double.infinity,
@@ -645,7 +647,7 @@ child: SizedBox(
     ),
   ),
 ),
-),
+),*/
 
 /*Padding(
   padding: const EdgeInsets.only(top: 10.0),

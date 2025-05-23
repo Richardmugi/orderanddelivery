@@ -46,12 +46,14 @@ android {
         checkReleaseBuilds false //<- add this line
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     defaultConfig {
@@ -89,24 +91,21 @@ flutter {
 }
 
 dependencies {
-    //classpath 'com.google.gms:google-services'
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
-    implementation 'com.android.support:multidex:1.0.3'
-    // Import the Firebase BoM
+    // Required for Firebase
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
-        implementation('com.google.firebase:firebase-auth') {
-            exclude module: "play-services-safetynet"
-        }
-
-    //implementation("com.google.firebase:firebase-iid")
-
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    // Declare the dependency for the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-
-    // Declare the dependencies for any other desired Firebase products
-    // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+    
+    // Firebase dependencies (versions managed by BOM)
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    
+    // MultiDex (only needed if minSdk < 21)
+    implementation 'com.android.support:multidex:2.0.1'
+    
+    // Java 8+ desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    
+    // Google Sign-In (required for Google authentication)
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
 }

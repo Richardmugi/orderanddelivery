@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             color: MyTheme.white,
                             borderRadius: BorderRadius.circular(8)),
                         child: Image.asset(
-                          "assets/orderdeliver.png",
+                          "assets/od.jpg",
                           filterQuality: FilterQuality.low,
                         ),
                       ),

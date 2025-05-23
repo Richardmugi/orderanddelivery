@@ -18,7 +18,7 @@
 	<string>6.0</string>
 
 	<key>CFBundleName</key>
-	<string>Active Ecommerce Flutter App</string>
+	<string>Order and Delivery</string>
 
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
@@ -39,6 +39,16 @@
 				<string>com.googleusercontent.apps.620463100599-ddb91en0ain1g4lim7ub25ced6lm6flr</string>
 			</array>
 		</dict>
+	</array>
+
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  		<string>google</string>
+  		<string>com.google</string>
+  		<string>com.google.gpp.app</string>
+  		<string>com.google.gpp.apps</string>
+		<string>com.google.Chrome</string>
+  		<string>com.google.gppconsent</string>
 	</array>
 
 	<key>CFBundleVersion</key>

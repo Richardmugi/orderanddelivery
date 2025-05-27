@@ -1,5 +1,5 @@
 import 'dart:convert';
-//import 'dart:io' show Platform;
+import 'dart:io' show Platform;
 import 'dart:math';
 
 import 'package:active_ecommerce_flutter/app_config.dart';
@@ -572,15 +572,15 @@ print("ID Token: $idToken");
                   ),
                 ),
               ),*/
-              //if (Platform.isIOS)
-                /*Padding(
+              if (Platform.isIOS)
+                Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: SignInWithAppleButton(
                     onPressed: () async {
                       signInWithApple();
                     },
                   ),
-                ),*/
+                ),
               Visibility(
                 visible: allow_google_login.$ || allow_facebook_login.$,
                 child: Padding(

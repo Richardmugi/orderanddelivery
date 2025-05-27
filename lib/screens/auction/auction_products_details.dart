@@ -601,7 +601,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       is_logged_in.$
                           ? showAlertDialog(context)
                           : Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Login()));
+                              MaterialPageRoute(builder: (context) => Cart()));
                     },
                     child: Container(
                       margin: EdgeInsets.only(

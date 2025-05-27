@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SelectAddress extends StatefulWidget {
-  int? owner_id;
+  final int? owner_id;
   SelectAddress({Key? key, this.owner_id}) : super(key: key);
 
   @override
@@ -93,7 +93,7 @@ class _SelectAddressState extends State<SelectAddress> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               LangText(context)
-                  .local!
+                  .local
                   .to_add_or_edit_addresses_go_to_address_page,
               style: TextStyle(
                   fontSize: 14,
@@ -117,7 +117,7 @@ class _SelectAddressState extends State<SelectAddress> {
         ),
       ),
       title: Text(
-        "${LangText(context).local!.shipping_cost_ucf}",
+        "${LangText(context).local.shipping_cost_ucf}",
         style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
@@ -131,7 +131,7 @@ class _SelectAddressState extends State<SelectAddress> {
           height: 100,
           child: Center(
               child: Text(
-            LangText(context).local!.you_need_to_log_in,
+            LangText(context).local.you_need_to_log_in,
             style: TextStyle(color: MyTheme.font_grey),
           )));
     } else if (!selectAddressProvider.faceData &&
@@ -207,7 +207,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 75,
             child: Text(
-              LangText(context).local!.phone_ucf,
+              LangText(context).local.phone_ucf,
               style: TextStyle(
                 color: MyTheme.grey_153,
               ),
@@ -236,7 +236,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 75,
             child: Text(
-              LangText(context).local!.postal_code,
+              LangText(context).local.postal_code,
               style: TextStyle(
                 color: MyTheme.grey_153,
               ),
@@ -265,7 +265,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 75,
             child: Text(
-              LangText(context).local!.country_ucf,
+              LangText(context).local.country_ucf,
               style: TextStyle(
                 color: MyTheme.grey_153,
               ),
@@ -294,7 +294,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 75,
             child: Text(
-              LangText(context).local!.state_ucf,
+              LangText(context).local.state_ucf,
               style: TextStyle(
                 color: MyTheme.grey_153,
               ),
@@ -323,7 +323,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 75,
             child: Text(
-              LangText(context).local!.city_ucf,
+              LangText(context).local.city_ucf,
               style: TextStyle(
                 color: MyTheme.grey_153,
               ),
@@ -352,7 +352,7 @@ class _SelectAddressState extends State<SelectAddress> {
           Container(
             width: 75,
             child: Text(
-              LangText(context).local!.address_ucf,
+              LangText(context).local.address_ucf,
               style: TextStyle(
                 color: MyTheme.grey_153,
               ),
@@ -404,7 +404,7 @@ class _SelectAddressState extends State<SelectAddress> {
             borderRadius: BorderRadius.circular(0.0),
           ),
           child: Text(
-            LangText(context).local!.continue_to_delivery_info_ucf,
+            LangText(context).local.continue_to_delivery_info_ucf,
             style: TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
@@ -449,7 +449,7 @@ class _SelectAddressState extends State<SelectAddress> {
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       child: Text(
-        "${LangText(context).local!.shipping_info}",
+        "${LangText(context).local.shipping_info}",
         style: TextStyle(
           fontSize: 16,
           color: MyTheme.dark_font_grey,

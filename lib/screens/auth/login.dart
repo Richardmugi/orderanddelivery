@@ -231,14 +231,19 @@ class _LoginState extends State<Login> {
       GoogleSignInAuthentication googleSignInAuthentication =
           await googleUser.authentication;
       String? accessToken = googleSignInAuthentication.accessToken;
+      String? idToken = googleSignInAuthentication.idToken;
 
-      // print("displayName ${googleUser.displayName}");
-      // print("email ${googleUser.email}");
-      // print("googleUser.id ${googleUser.id}");
+print("Access Token: $accessToken");
+print("ID Token: $idToken");
+
+      print("displayName ${googleUser.displayName}");
+      print("email ${googleUser.email}");
+      print("googleUser.id ${googleUser.id}");
 
       var loginResponse = await AuthRepository().getSocialLoginResponse(
-          "google", null, googleUser.email, googleUser.id,
+          "google", googleUser.displayName, googleUser.email, googleUser.id,
           access_token: accessToken);
+
 
       if (loginResponse.result == false) {
         ToastComponent.showDialog(
@@ -568,15 +573,15 @@ class _LoginState extends State<Login> {
                 ),
               ),*/
               //if (Platform.isIOS)
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: SignInWithAppleButton(
                     onPressed: () async {
                       signInWithApple();
                     },
                   ),
-                ),
-              /*Visibility(
+                ),*/
+              Visibility(
                 visible: allow_google_login.$ || allow_facebook_login.$,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20.0),
@@ -600,7 +605,7 @@ class _LoginState extends State<Login> {
       ),
     ),
   ),
-),*/
+),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                 child: Center(

@@ -271,7 +271,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
         height: 100,
         child: Center(
             child: Text(
-          LangText(context).local!.you_need_to_log_in,
+          LangText(context).local.you_need_to_log_in,
           style: TextStyle(color: MyTheme.font_grey),
         )));
   }
@@ -545,7 +545,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                                 .transitTime
                                 .toString() +
                             " " +
-                            LangText(context).local!.day_ucf,
+                            LangText(context).local.day_ucf,
                         maxLines: 2,
                         style: TextStyle(
                             fontSize: 13,
@@ -921,7 +921,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               Padding(
                 padding: const EdgeInsets.only(top: 18.0),
                 child: Text(
-                  LangText(context).local!.choose_delivery_ucf,
+                  LangText(context).local.choose_delivery_ucf,
                   style: TextStyle(
                       color: MyTheme.dark_font_grey,
                       fontWeight: FontWeight.w700,

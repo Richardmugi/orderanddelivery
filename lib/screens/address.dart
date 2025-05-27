@@ -17,7 +17,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class Address extends StatefulWidget {
   Address({Key? key, this.from_shipping_info = false}) : super(key: key);
-  bool from_shipping_info;
+  final bool from_shipping_info;
+  
 
   @override
   _AddressState createState() => _AddressState();
@@ -33,6 +34,7 @@ class _AddressState extends State<Address> {
 
   bool _isInitial = true;
   List<dynamic> _shippingAddressList = [];
+  
 
   //controllers for add purpose
   TextEditingController _addressController = TextEditingController();
@@ -63,50 +65,43 @@ class _AddressState extends State<Address> {
     }
   }
 
-  fetchAll() {
-    fetchShippingAddressList();
+  fetchAll() async {
+  await fetchShippingAddressList(); // Wait for it to complete
+}
 
-    setState(() {});
-  }
-
-  fetchShippingAddressList() async {
-    // print("enter fetchShippingAddressList");
+Future<void> fetchShippingAddressList() async {
+  try {
     var addressResponse = await AddressRepository().getAddressList();
     _shippingAddressList.addAll(addressResponse.addresses);
-    setState(() {
-      _isInitial = false;
-    });
-    if (_shippingAddressList.length > 0) {
-      var count = 0;
-      _shippingAddressList.forEach((address) {
+
+    if (_shippingAddressList.isNotEmpty) {
+      for (var address in _shippingAddressList) {
         if (address.set_default == 1) {
           _default_shipping_address = address.id;
         }
-        _addressControllerListForUpdate
-            .add(TextEditingController(text: address.address));
-        _postalCodeControllerListForUpdate
-            .add(TextEditingController(text: address.postal_code));
-        _phoneControllerListForUpdate
-            .add(TextEditingController(text: address.phone));
-        _countryControllerListForUpdate
-            .add(TextEditingController(text: address.country_name));
-        _stateControllerListForUpdate
-            .add(TextEditingController(text: address.state_name));
-        _cityControllerListForUpdate
-            .add(TextEditingController(text: address.city_name));
-        _selected_country_list_for_update
-            .add(Country(id: address.country_id, name: address.country_name));
-        _selected_state_list_for_update
-            .add(MyState(id: address.state_id, name: address.state_name));
-        _selected_city_list_for_update
-            .add(City(id: address.city_id, name: address.city_name));
-      });
+        _addressControllerListForUpdate.add(TextEditingController(text: address.address));
+        _postalCodeControllerListForUpdate.add(TextEditingController(text: address.postal_code));
+        _phoneControllerListForUpdate.add(TextEditingController(text: address.phone));
+        _countryControllerListForUpdate.add(TextEditingController(text: address.country_name));
+        _stateControllerListForUpdate.add(TextEditingController(text: address.state_name));
+        _cityControllerListForUpdate.add(TextEditingController(text: address.city_name));
 
-      // print("fetchShippingAddressList");
+        _selected_country_list_for_update.add(Country(id: address.country_id, name: address.country_name));
+        _selected_state_list_for_update.add(MyState(id: address.state_id, name: address.state_name));
+        _selected_city_list_for_update.add(City(id: address.city_id, name: address.city_name));
+      }
     }
 
-    setState(() {});
+    setState(() {
+      _isInitial = false; // Mark loading as complete
+    });
+  } catch (e) {
+    print("Error fetching addresses: $e");
+    setState(() {
+      _isInitial = false;
+    });
   }
+}
 
   reset() {
     _default_shipping_address = 0;
@@ -135,11 +130,12 @@ class _AddressState extends State<Address> {
   }
 
   Future<void> _onRefresh() async {
-    reset();
-    if (is_logged_in.$ == true) {
-      fetchAll();
-    }
+  reset();
+  if (is_logged_in.$ == true) {
+    await fetchAll(); // Wait for data before UI updates
   }
+}
+
 
   onPopped(value) async {
     reset();
@@ -822,7 +818,7 @@ class _AddressState extends State<Address> {
                             side: BorderSide(
                                 color: MyTheme.light_grey, width: 1)),
                         child: Text(
-                          LangText(context).local!.close_ucf,
+                          LangText(context).local.close_ucf,
                           style: TextStyle(
                             color: MyTheme.accent_color,
                             fontSize: 16,

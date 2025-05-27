@@ -386,7 +386,7 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   _login_by == "email"
@@ -561,41 +561,8 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0, bottom: 15),
-                child: Center(
-                    child: Text(
-                  AppLocalizations.of(context)!
-                      .login_screen_or_create_new_account,
-                  style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                )),
-              ),
-              Container(
-                height: 45,
-                child: Btn.minWidthFixHeight(
-                  minWidth: MediaQuery.of(context).size.width,
-                  height: 50,
-                  color: MyTheme.amber,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(6.0))),
-                  child: Text(
-                    AppLocalizations.of(context)!.login_screen_sign_up,
-                    style: TextStyle(
-                        color: MyTheme.accent_color,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return Registration();
-                    }));
-                  },
-                ),
-              ),
-              if (Platform.isIOS)
+              ),*/
+                if (Platform.isIOS)
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: SignInWithAppleButton(
@@ -679,6 +646,39 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0, bottom: 15),
+                child: Center(
+                    child: Text(
+                  AppLocalizations.of(context)!
+                      .login_screen_or_create_new_account,
+                  style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                )),
+              ),
+              Container(
+                height: 45,
+                child: Btn.minWidthFixHeight(
+                  minWidth: MediaQuery.of(context).size.width,
+                  height: 50,
+                  color: MyTheme.amber,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(6.0))),
+                  child: Text(
+                    AppLocalizations.of(context)!.login_screen_sign_up,
+                    style: TextStyle(
+                        color: MyTheme.accent_color,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Registration();
+                    }));
+                  },
                 ),
               ),
             ],

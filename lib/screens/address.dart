@@ -18,7 +18,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 class Address extends StatefulWidget {
   Address({Key? key, this.from_shipping_info = false}) : super(key: key);
   bool from_shipping_info;
-  
 
   @override
   _AddressState createState() => _AddressState();
@@ -34,7 +33,6 @@ class _AddressState extends State<Address> {
 
   bool _isInitial = true;
   List<dynamic> _shippingAddressList = [];
-  
 
   //controllers for add purpose
   TextEditingController _addressController = TextEditingController();
@@ -462,14 +460,14 @@ class _AddressState extends State<Address> {
       case 1:
         onPressDelete(_shippingAddressList[listIndex].id);
         break;
-      /*case 2:
+      case 2:
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return MapLocation(address: _shippingAddressList[listIndex]);
         })).then((value) {
           onPopped(value);
         });
         //deleteProduct(productId);
-        break; */
+        break;
       default:
         break;
     }

@@ -20,7 +20,6 @@ import 'package:active_ecommerce_flutter/social_config.dart';
 import 'package:active_ecommerce_flutter/ui_elements/auth_ui.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -34,7 +33,6 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../custom/loading.dart';
 import '../../repositories/address_repository.dart';
 import 'otp.dart';
-import 'package:sign_in_button/sign_in_button.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -80,7 +78,7 @@ class _LoginState extends State<Login> {
   onPressedLogin(ctx) async {
     FocusScope.of(context).unfocus();
 
-    //Loading.show(context);
+    Loading.show(context);
     var email = _emailController.text.toString();
     var password = _passwordController.text.toString();
 
@@ -103,8 +101,7 @@ class _LoginState extends State<Login> {
 
     var loginResponse = await AuthRepository().getLoginResponse(
         _login_by == 'email' ? email : _phone, password, _login_by);
-        print("Login response: $loginResponse");
-    //Loading.close();
+    Loading.close();
 
     // empty temp user id after logged in
     temp_user_id.$ = "";
@@ -161,7 +158,7 @@ class _LoginState extends State<Login> {
 
       // redirect
       if (loginResponse.user!.emailVerified!) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Main()));
+        context.push("/");
       } else {
         if ((mail_verification_status.$ && _login_by == "email") ||
             (mail_verification_status.$ && _login_by == "phone")) {
@@ -172,8 +169,7 @@ class _LoginState extends State<Login> {
                 );
           }));
         } else {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Main()));
-          //context.push("/");
+          context.push("/");
         }
       }
     }
@@ -224,26 +220,21 @@ class _LoginState extends State<Login> {
 
   onPressedGoogleLogin() async {
     try {
-      final GoogleSignInAccount googleUser = (await GoogleSignIn(scopes: ['email'],).signIn())!;
+      final GoogleSignInAccount googleUser = (await GoogleSignIn().signIn())!;
 
       print(googleUser.toString());
 
       GoogleSignInAuthentication googleSignInAuthentication =
           await googleUser.authentication;
       String? accessToken = googleSignInAuthentication.accessToken;
-      String? idToken = googleSignInAuthentication.idToken;
 
-print("Access Token: $accessToken");
-print("ID Token: $idToken");
-
-      print("displayName ${googleUser.displayName}");
-      print("email ${googleUser.email}");
-      print("googleUser.id ${googleUser.id}");
+      // print("displayName ${googleUser.displayName}");
+      // print("email ${googleUser.email}");
+      // print("googleUser.id ${googleUser.id}");
 
       var loginResponse = await AuthRepository().getSocialLoginResponse(
           "google", googleUser.displayName, googleUser.email, googleUser.id,
           access_token: accessToken);
-
 
       if (loginResponse.result == false) {
         ToastComponent.showDialog(
@@ -264,7 +255,6 @@ print("ID Token: $idToken");
       // TODO
     }
   }
-
 
   /*onPressedTwitterLogin() async {
     try {
@@ -396,7 +386,7 @@ print("ID Token: $idToken");
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /*Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   _login_by == "email"
@@ -405,9 +395,9 @@ print("ID Token: $idToken");
                   style: TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
-              ),*/
-              //if (_login_by == "email")
-                /*Padding(
+              ),
+              if (_login_by == "email")
+                Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -440,8 +430,8 @@ print("ID Token: $idToken");
                           : Container()
                     ],
                   ),
-                )*/
-              /*else
+                )
+              else
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Column(
@@ -498,16 +488,16 @@ print("ID Token: $idToken");
                       )
                     ],
                   ),
-                ),*/
-              /*Padding(
+                ),
+              Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   AppLocalizations.of(context)!.password_ucf,
                   style: TextStyle(
                       color: MyTheme.accent_color, fontWeight: FontWeight.w600),
                 ),
-              ),*/
-              /*Padding(
+              ),
+              Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -542,8 +532,8 @@ print("ID Token: $idToken");
                     )
                   ],
                 ),
-              ),*/
-              /*Padding(
+              ),
+              Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Container(
                   height: 45,
@@ -571,41 +561,7 @@ print("ID Token: $idToken");
                     },
                   ),
                 ),
-              ),*/
-              if (Platform.isIOS)
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: SignInWithAppleButton(
-                    onPressed: () async {
-                      signInWithApple();
-                    },
-                  ),
-                ),
-              Visibility(
-                visible: allow_google_login.$ || allow_facebook_login.$,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Center(
-                      child: Text(
-                    AppLocalizations.of(context)!.login_screen_login_with,
-                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                  )),
-                ),
               ),
-              Padding(
-  padding: const EdgeInsets.only(top: 10.0),
-  child: SizedBox(
-    width: double.infinity,
-    height: 48, // same height as Apple button
-    child: SignInButton(
-      Buttons.google,
-      onPressed: onPressedGoogleLogin,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8), // match Apple button radius
-      ),
-    ),
-  ),
-),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                 child: Center(
@@ -639,37 +595,27 @@ print("ID Token: $idToken");
                   },
                 ),
               ),
-/*Padding(
-  padding: const EdgeInsets.only(top: 10.0),
-child: SizedBox(
-  width: double.infinity,
-  height: 48,
-  child: SignInButton(
-    Buttons.facebookNew,
-    onPressed: onPressedFacebookLogin,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-    ),
-  ),
-),
-),*/
-
-/*Padding(
-  padding: const EdgeInsets.only(top: 10.0),
-child: SizedBox(
-  width: double.infinity,
-  height: 48,
-  child: SignInButton(
-    Buttons.twitter,
-    onPressed: onPressedTwitterLogin,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-    ),
-  ),
-),
-),*/
-
-              /*Padding(
+              if (Platform.isIOS)
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SignInWithAppleButton(
+                    onPressed: () async {
+                      signInWithApple();
+                    },
+                  ),
+                ),
+              Visibility(
+                visible: allow_google_login.$ || allow_facebook_login.$,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Center(
+                      child: Text(
+                    AppLocalizations.of(context)!.login_screen_login_with,
+                    style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                  )),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Center(
                   child: Container(
@@ -703,7 +649,7 @@ child: SizedBox(
                             ),
                           ),
                         ),
-                        if (allow_twitter_login.$)
+                        /*if (allow_twitter_login.$)
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: InkWell(
@@ -715,7 +661,7 @@ child: SizedBox(
                                 child: Image.asset("assets/twitter_logo.png"),
                               ),
                             ),
-                          ),
+                          ),*/
                         /* if (Platform.isIOS)
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
@@ -734,7 +680,7 @@ child: SizedBox(
                     ),
                   ),
                 ),
-              ),*/
+              ),
             ],
           ),
         )

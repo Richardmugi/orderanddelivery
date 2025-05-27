@@ -119,11 +119,8 @@
 	<key>NSDocumentDirectory</key>
 	<integer>1</integer>
 
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>User can set address using phone location</string>
-
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>location when in use</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We use your location to provide accurate delivery options, show nearby offers, and suggest local pickup points to enhance your shopping experience.</string>
 
 	<key>NSMotionUsageDescription</key>
 	<string>This app will use your motion data for your active tasks</string>

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class VideoDescription extends StatefulWidget {
-  final String? url;
+  String? url;
 
   VideoDescription({Key? key, this.url}) : super(key: key);
 

@@ -3,7 +3,6 @@ import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
 import 'package:active_ecommerce_flutter/screens/auth/login.dart';
-import 'package:active_ecommerce_flutter/screens/checkout/cart.dart';
 import 'package:active_ecommerce_flutter/screens/orders/order_details.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -146,7 +145,7 @@ class PushNotificationService {
                       onPressed: () {
                         Navigator.of(context).pop();
                         OneContext().push(MaterialPageRoute(builder: (_) {
-                          return Cart();
+                          return Login();
                         }));
                       }),
                 ],

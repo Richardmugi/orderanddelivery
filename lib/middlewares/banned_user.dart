@@ -15,7 +15,7 @@ class BannedUser extends Middleware {
     if (jsonData.runtimeType!=List && jsonData.containsKey("result") && !jsonData['result']) {
       if (jsonData.containsKey("status") &&
           jsonData['status'] == "banned") {
-        //AuthHelper().clearUserData();
+        AuthHelper().clearUserData();
         if(SystemConfig.context !=null) {
           SystemConfig.context!.go('/');
         }

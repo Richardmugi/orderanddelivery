@@ -49,16 +49,14 @@ import 'package:shared_value/shared_value.dart';
 
 import 'app_config.dart';
 import 'lang_config.dart';
-import 'package:flutter/foundation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb) {
-    await FlutterDownloader.initialize(
-      debug: true,
-      ignoreSsl: true,
-    );
-  }
+  await FlutterDownloader.initialize(
+    debug: true, // Optional: set to false to disable printing logs to console
+    ignoreSsl:
+        true, // Optional: set to false to disable working with HTTP links
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

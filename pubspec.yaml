@@ -65,9 +65,9 @@ dependencies:
   google_fonts: ^6.2.1
   google_sign_in: ^6.3.0
   google_maps_flutter: ^2.12.2
-  google_maps_place_picker_mb: ^3.1.2
-  google_api_headers: ^2.0.0
-  # code needed
+  google_maps_place_picker_mb:
+    git:
+      url: https://github.com/Richardmugi/google_maps_place_picker_mb.git
   
 
   http: ^1.2.2

@@ -41,3 +41,5 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 # app_config.dart
+
+!packages/google_api_headers/**sok

@@ -42,4 +42,3 @@ app.*.symbols
 app.*.map.json
 # app_config.dart
 
-!packages/google_api_headers-2.0.3/**sok

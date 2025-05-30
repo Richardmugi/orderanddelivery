@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 # flutter pub upgrade --major-versions
-version: 4.9.0+12
+version: 4.9.0+13
 
 environment:
   sdk: ^3.5.0
@@ -66,8 +66,9 @@ dependencies:
   google_sign_in: ^6.3.0
   google_maps_flutter: ^2.12.2
   google_maps_place_picker_mb: ^3.1.2
-  #google_api_headers: ^2.0.0
+  google_api_headers: ^2.0.0
   # code needed
+  
 
   http: ^1.2.2
 
@@ -111,9 +112,7 @@ dependencies:
   firebase_auth: ^5.5.4
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-dependency_overrides:
-  google_api_headers:
-    path: packages/google_api_headers-2.0.3
+
 
 
 dev_dependencies:

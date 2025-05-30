@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_lints: 2.0.3
   flutter_test:
     sdk: flutter
-  mocktail: 1.0.1
+  mocktail: ^1.0.1
 
 flutter:
   plugin:
@@ -33,5 +33,5 @@ flutter:
       #  default_package: google_api_headers
       #windows:
       #  default_package: google_api_headers
-      linux:
-        default_package: google_api_headers
+      #linux:
+      #  default_package: google_api_headers

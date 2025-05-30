@@ -151,16 +151,16 @@ class _MainState extends State<Main> {
               onTap: onTapped,
               currentIndex: _currentIndex,
               backgroundColor: Colors.white.withOpacity(0.95),
-              unselectedItemColor: Color.fromRGBO(168, 175, 179, 1),
+              unselectedItemColor: Color.fromRGBO(174, 133, 44, 1),
               selectedItemColor: MyTheme.accent_color,
               selectedLabelStyle: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: MyTheme.accent_color,
-                  fontSize: 12),
+                  fontSize: 15),
               unselectedLabelStyle: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(168, 175, 179, 1),
-                  fontSize: 12),
+                  color: Color.fromRGBO(174, 133, 44, 1),
+                  fontSize: 15),
               items: [
                 BottomNavigationBarItem(
                     icon: Padding(

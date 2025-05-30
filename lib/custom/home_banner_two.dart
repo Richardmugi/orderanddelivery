@@ -54,6 +54,7 @@ class HomeBannerTwo extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 9.0, right: 9, top: 20.0, bottom: 10),
                   child: Container(
+                    height: 180,
                       width: double.infinity,
                       child: InkWell(
                           onTap: () {
@@ -62,7 +63,7 @@ class HomeBannerTwo extends StatelessWidget {
                             print(url);
                             GoRouter.of(context).go(url);
                           },
-                          child: AIZImage.radiusImage(i.photo, 6))),
+                          child: AIZImage.radiusImage(i.photo, 6, fit: BoxFit.cover))),
                 );
               },
             );

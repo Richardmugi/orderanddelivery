@@ -570,7 +570,7 @@ InputDecoration buildAddressInputDecoration(BuildContext context, hintText) {
       filled: true,
       fillColor: MyTheme.light_grey,
       hintText: hintText,
-      hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+      hintStyle: TextStyle(fontSize: 15.0, color: Color.fromRGBO(174, 133, 44, 1)),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: MyTheme.noColor, width: 0.5),
         borderRadius: const BorderRadius.all(

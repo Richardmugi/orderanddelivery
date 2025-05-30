@@ -12,7 +12,7 @@ class MyTheme {
   /*configurable colors ends*/
   /*If you are not a developer, do not change the bottom colors*/
   static const Color white = Color.fromRGBO(174, 133, 44, 1);
-  static Color noColor = Color.fromRGBO(255, 255, 255, 0);
+  static Color noColor = Color.fromRGBO(174, 133, 44, 1);
   static Color light_grey = Color.fromRGBO(239, 239, 239, 1);
   static Color dark_grey = Color.fromRGBO(107, 115, 119, 1);
   static Color medium_grey = Color.fromRGBO(167, 175, 179, 1);

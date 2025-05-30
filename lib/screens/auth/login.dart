@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
+//import 'dart:io' show Platform;
 import 'dart:math';
 
 import 'package:active_ecommerce_flutter/app_config.dart';
@@ -27,6 +27,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 //import 'package:twitter_login/twitter_login.dart';
 
@@ -386,7 +387,7 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /*Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   _login_by == "email"
@@ -561,8 +562,8 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 ),
-              ),*/
-                if (Platform.isIOS)
+              ),
+                //if (Platform.isIOS)
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: SignInWithAppleButton(
@@ -582,72 +583,20 @@ class _LoginState extends State<Login> {
                   )),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Center(
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Visibility(
-                          visible: allow_google_login.$,
-                          child: InkWell(
-                            onTap: () {
-                              onPressedGoogleLogin();
-                            },
-                            child: Container(
-                              width: 28,
-                              child: Image.asset("assets/google_logo.png"),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: Visibility(
-                            visible: allow_facebook_login.$,
-                            child: InkWell(
-                              onTap: () {
-                                onPressedFacebookLogin();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/facebook_logo.png"),
-                              ),
-                            ),
-                          ),
-                        ),
-                        /*if (allow_twitter_login.$)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: InkWell(
-                              onTap: () {
-                                onPressedTwitterLogin();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/twitter_logo.png"),
-                              ),
-                            ),
-                          ),*/
-                        /* if (Platform.isIOS)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            // visible: true,
-                            child: A(
-                              onTap: () async {
-                                signInWithApple();
-                              },
-                              child: Container(
-                                width: 28,
-                                child: Image.asset("assets/apple_logo.png"),
-                              ),
-                            ),
-                          ),*/
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              /*Padding(
+  padding: const EdgeInsets.only(top: 10.0),
+  child: SizedBox(
+    width: double.infinity,
+    height: 48, // same height as Apple button
+    child: SignInButton(
+      Buttons.google,
+      onPressed: onPressedGoogleLogin,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8), // match Apple button radius
+      ),
+    ),
+  ),
+),*/
               Padding(
                 padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                 child: Center(

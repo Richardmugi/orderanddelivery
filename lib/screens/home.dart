@@ -78,7 +78,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 preferredSize: Size.fromHeight(50),
                 child: buildAppBar(statusBarHeight, context),
               ),
-              body: ListenableBuilder(
+              body: Padding(
+              padding: const EdgeInsets.only(top: 16.0), 
+              child: ListenableBuilder(
                   listenable: homeData,
                   builder: (context, child) {
                     return Stack(
@@ -262,6 +264,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   })),
         ),
       ),
+    )
     );
   }
 
@@ -439,6 +442,40 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       ),
     );
   }
+
+  /*PreferredSize buildAppBar(double statusBarHeight, BuildContext context) {
+  return PreferredSize(
+    preferredSize: Size.fromHeight(150), // Adjust height as needed
+    child: AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.white,
+      centerTitle: false,
+      elevation: 0,
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 18, right: 18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            /*Image.asset(
+              "assets/od5.png",
+              height: 30,
+            ),
+            const SizedBox(height: 10),*/
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Filter();
+                }));
+              },
+              child: HomeSearchBox(context: context),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}*/
 
   Container buildProductLoadingContainer(HomePresenter homeData) {
     return Container(

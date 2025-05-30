@@ -11,26 +11,37 @@ class HomeSearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 36,
+      height: 50,
       decoration: BoxDecorations.buildBoxDecoration_1(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(
+        children: [
+          // Logo
+          Image.asset(
+            "assets/od5.png",
+            height: 50,
+          ),
+          const SizedBox(width: 50),
+
+          // Search Text Placeholder
+          Expanded(
+            child: Text(
               AppLocalizations.of(context)!.search_anything,
-              style: TextStyle(fontSize: 13.0, color: MyTheme.textfield_grey),
+              style: const TextStyle(
+                fontSize: 16.0,
+                color: Color.fromRGBO(174, 133, 44, 1),
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-            Image.asset(
-              'assets/search.png',
-              height: 16,
-              //color: MyTheme.dark_grey,
-              color: MyTheme.dark_grey,
-            )
-          ],
-        ),
+          ),
+
+          // Search Icon
+          Image.asset(
+            'assets/search.png',
+            height: 18,
+            color: MyTheme.dark_grey,
+          ),
+        ],
       ),
     );
   }

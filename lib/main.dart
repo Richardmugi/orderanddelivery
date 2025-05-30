@@ -46,17 +46,22 @@ import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'app_config.dart';
 import 'lang_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(
+  if (!kIsWeb) {
+    await FlutterDownloader.initialize(
+      debug: true, // optional: set to false in production
+    );
+  }
+  /*await FlutterDownloader.initialize(
     debug: true, // Optional: set to false to disable printing logs to console
     ignoreSsl:
         true, // Optional: set to false to disable working with HTTP links
-  );
+  );*/
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

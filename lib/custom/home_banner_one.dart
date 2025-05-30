@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_flutter/presenter/home_presenter.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,8 +33,8 @@ class HomeBannerOne extends StatelessWidget {
             : const EdgeInsets.only(left: 9.0),
         child: CarouselSlider(
           options: CarouselOptions(
-              aspectRatio: 270 / 120,
-              viewportFraction: .75,
+              aspectRatio: 16 / 9,
+              viewportFraction: .46,
               initialPage: 0,
               padEnds: false,
               enableInfiniteScroll: false,
@@ -45,28 +46,40 @@ class HomeBannerOne extends StatelessWidget {
                 // });
               }),
           items: homeData!.bannerOneImageList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 9.0, right: 9, top: 20.0, bottom: 20),
-                  child: Container(
-                    //color: Colors.amber,
-                    width: double.infinity,
-                    child: InkWell(
-                      onTap: () {
-                        var url =
-                            i.url?.split(AppConfig.DOMAIN_PATH).last ?? "";
-                        print(url);
-                        GoRouter.of(context).go(url);
-                      },
-                      child: AIZImage.radiusImage(i.photo, 6),
-                    ),
-                  ),
-                );
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      // Width that CarouselSlider gives this child
+      final double w = constraints.maxWidth;
+
+      // Desired aspect-ratio (16:9) → h = w / (16/9)
+      final double h = w / (16 / 9);
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 20.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: SizedBox(
+            width: w,
+            height: h,
+            child: InkWell(
+              onTap: () {
+                final url = i.url?.split(AppConfig.DOMAIN_PATH).last ?? '';
+                GoRouter.of(context).go(url);
               },
-            );
-          }).toList(),
+              child: CachedNetworkImage(
+                imageUrl: i.photo!,
+                fit: BoxFit.cover,          // fills, crops top/bottom if needed
+                placeholder: (_, __) => Container(color: Colors.grey[300]),
+                errorWidget: (_, __, ___) => Icon(Icons.error),
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}).toList(),
+
         ),
       );
     } else if (!homeData!.isBannerOneInitial &&

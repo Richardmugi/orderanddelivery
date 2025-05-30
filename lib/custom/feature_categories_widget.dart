@@ -76,7 +76,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 12,
-                          color: MyTheme.font_grey,
+                          color: Color.fromRGBO(174, 133, 44, 1),
                         ),
                       ),
                     ),
@@ -94,7 +94,7 @@ class FeaturedCategoriesWidget extends StatelessWidget {
         child: Center(
           child: Text(
             AppLocalizations.of(context)!.no_category_found,
-            style: TextStyle(color: MyTheme.font_grey),
+            style: TextStyle(color: Color.fromRGBO(174, 133, 44, 1)),
           ),
         ),
       );

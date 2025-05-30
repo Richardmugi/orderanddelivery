@@ -866,6 +866,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "15.1.2"
+  google_api_headers:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "777c00107a0ff067cc59a38bdc8af15949b63824"
+      url: "https://github.com/Richardmugi/google_api_headers.git"
+    source: git
+    version: "4.5.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -935,7 +944,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: bbf5c2ca950c2379b0048ee2f163a84c8eaaf352
+      resolved-ref: "3cc6714974545155aebe17b86aa5b3497faa5908"
       url: "https://github.com/Richardmugi/google_maps_place_picker_mb.git"
     source: git
     version: "3.1.2"

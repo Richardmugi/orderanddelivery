@@ -70,7 +70,7 @@ dependencies:
     git:
       url: https://github.com/Richardmugi/google_maps_place_picker_mb.git
 
-  flutter_gen: ^5.10.0
+  #flutter_gen: ^5.10.0
   
 #code
   http: ^1.2.2

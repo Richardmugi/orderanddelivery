@@ -15,7 +15,7 @@ import 'package:active_ecommerce_flutter/repositories/address_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
+import 'package:google_maps_place_picker_mb_v2/google_maps_place_picker.dart';
 
 class MapLocation extends StatefulWidget {
   MapLocation({Key? key, this.address}) : super(key: key);

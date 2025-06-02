@@ -30,7 +30,7 @@ import 'package:active_ecommerce_flutter/screens/payment_method_screen/sslcommer
 import 'package:active_ecommerce_flutter/screens/payment_method_screen/stripe_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '/l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 
 import '../../custom/loading.dart';

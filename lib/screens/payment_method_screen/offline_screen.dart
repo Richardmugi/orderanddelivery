@@ -15,7 +15,7 @@ import 'package:active_ecommerce_flutter/screens/wallet.dart';
 import 'package:active_ecommerce_flutter/ui_elements/html_content_webview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '/l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OfflineScreen extends StatefulWidget {

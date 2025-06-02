@@ -1,6 +1,6 @@
 import 'package:active_ecommerce_flutter/presenter/home_presenter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 
 import '../helpers/shimmer_helper.dart';
 import '../ui_elements/product_card.dart';

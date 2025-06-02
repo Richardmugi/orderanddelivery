@@ -10,7 +10,7 @@ import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/repositories/clubpoint_repository.dart';
 import 'package:active_ecommerce_flutter/screens/wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 
 class Clubpoint extends StatefulWidget {
   @override

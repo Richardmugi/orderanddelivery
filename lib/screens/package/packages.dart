@@ -13,7 +13,7 @@ import 'package:active_ecommerce_flutter/screens/checkout/checkout.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '/l10n/app_localizations.dart';
 
 import '../../helpers/shared_value_helper.dart';
 import '../auth/login.dart';

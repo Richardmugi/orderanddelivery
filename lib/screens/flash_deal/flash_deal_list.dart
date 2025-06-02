@@ -12,7 +12,7 @@ import 'package:active_ecommerce_flutter/repositories/flash_deal_repository.dart
 import 'package:active_ecommerce_flutter/screens/flash_deal/flash_deal_products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/index.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '/l10n/app_localizations.dart';
 
 class FlashDealList extends StatefulWidget {
   @override

@@ -110,10 +110,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       18.0,
                                       0.0,
                                     ),
-                                    child: buildHomeMenuRow1(context, homeData),
+                                    //child: buildHomeMenuRow1(context, homeData),
                                   ),
-                                  HomeBannerOne(
-                                      context: context, homeData: homeData),
+                                  /*HomeBannerOne(
+                                      context: context, homeData: homeData),*/
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                       18.0,
@@ -121,13 +121,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       18.0,
                                       0.0,
                                     ),
-                                    child: buildHomeMenuRow2(context),
+                                    //child: buildHomeMenuRow2(context),
                                   ),
                                 ]),
                               ),
 
                               // featured categories
-                              SliverList(
+                              /*SliverList(
                                 delegate: SliverChildListDelegate([
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(
@@ -151,16 +151,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     ),
                                   ),
                                 ]),
-                              ),
-                              SliverToBoxAdapter(
+                              ),*/
+                              /*SliverToBoxAdapter(
                                 child: SizedBox(
                                   height: 154,
                                   child: FeaturedCategoriesWidget(
                                     homeData: homeData,
                                   ),
                                 ),
-                              ),
-                              SliverList(
+                              ),*/
+                              /*SliverList(
                                 delegate: SliverChildListDelegate([
                                   Container(
                                     color: MyTheme.accent_color,
@@ -207,15 +207,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     ),
                                   ),
                                 ]),
-                              ),
-                              SliverList(
+                              ),*/
+                              /*SliverList(
                                 delegate: SliverChildListDelegate(
                                   [
                                     HomeBannerTwo(
                                         context: context, homeData: homeData),
                                   ],
                                 ),
-                              ),
+                              ),*/
                               SliverList(
                                 delegate: SliverChildListDelegate([
                                   Padding(
@@ -239,17 +239,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
-                                  SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        HomeAllProducts2(
-                                            context: context,
-                                            homeData: homeData),
-                                      ],
-                                    ),
-                                  ),
+                                  SizedBox(
+      height: 600, // Set your desired fixed height
+      child: HomeAllProducts2(
+        context: context,
+        homeData: homeData,
+      ),
+    ),
                                   Container(
-                                    height: 80,
+                                    height: 50,
                                   )
                                 ]),
                               ),
@@ -268,7 +266,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  Widget buildHomeMenuRow1(BuildContext context, HomePresenter homeData) {
+  /*Widget buildHomeMenuRow1(BuildContext context, HomePresenter homeData) {
     return Row(
       children: [
         if (homeData.isTodayDeal)
@@ -338,9 +336,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           )
       ],
     );
-  }
+  }*/
 
-  Widget buildHomeMenuRow2(BuildContext context) {
+  /*Widget buildHomeMenuRow2(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -417,7 +415,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
       ],
     );
-  }
+  }*/
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
     return AppBar(

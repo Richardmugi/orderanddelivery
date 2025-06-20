@@ -9,6 +9,7 @@ import 'package:active_ecommerce_flutter/screens/auth/login.dart';
 import 'package:active_ecommerce_flutter/screens/category_list_n_product/category_list.dart';
 import 'package:active_ecommerce_flutter/screens/checkout/cart.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
+import 'package:active_ecommerce_flutter/screens/home2.dart';
 import 'package:active_ecommerce_flutter/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
@@ -59,10 +60,11 @@ class _MainState extends State<Main> {
   void initState() {
     _children = [
       Home(),
-      CategoryList(
+      Home2(),
+      /*CategoryList(
         slug: "",
         is_base_category: true,
-      ),
+      ),*/
       Cart(
         has_bottomnav: true,
         from_navigation: true,
@@ -185,7 +187,7 @@ class _MainState extends State<Main> {
                         height: 16,
                       ),
                     ),
-                    label: AppLocalizations.of(context)!.categories_ucf),
+                    label: AppLocalizations.of(context)!.all_products_ucf),
                 BottomNavigationBarItem(
                     icon: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),

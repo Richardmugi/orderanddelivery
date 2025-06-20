@@ -20,8 +20,8 @@ import '../custom/home_carousel_slider.dart';
 import '../custom/home_search_box.dart';
 import '../custom/pirated_widget.dart';
 
-class Home extends StatefulWidget {
-  Home({
+class Home2 extends StatefulWidget {
+  Home2({
     Key? key,
     this.title,
     this.show_back_button = false,
@@ -33,10 +33,10 @@ class Home extends StatefulWidget {
   late bool go_back;
 
   @override
-  _HomeState createState() => _HomeState();
+  _Home2State createState() => _Home2State();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
+class _Home2State extends State<Home2> with TickerProviderStateMixin {
   HomePresenter homeData = HomePresenter();
 
   @override
@@ -232,8 +232,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       children: [
                                         Text(
                                           AppLocalizations.of(context)!
-                                          .categories_ucf,
-                                              //.all_products_ucf,
+                                          //.categories_ucf,
+                                              .all_products_ucf,
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w700,
@@ -243,11 +243,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   
-      CategoryGrid(
-      isTopCategory: true,         // or false
-      isBaseCategory: true,        // depending on your usage
-      slug: "some-slug",           // optional if not top category
-    ),
+      HomeAllProducts2(
+        context: context,
+        homeData: homeData,
+    ), 
                                   Container(
                                     height: 50,
                                   )

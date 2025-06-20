@@ -26,9 +26,7 @@ class HomeAllProducts2 extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
-          itemCount: homeData!.allProductList.length >= 6
-    ? 6
-    : homeData!.allProductList.length,
+          itemCount: homeData!.allProductList.length,
           shrinkWrap: true,
           padding: EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),

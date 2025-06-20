@@ -239,12 +239,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-      height: 600, // Set your desired fixed height
-      child: HomeAllProducts2(
+                                  
+      HomeAllProducts2(
         context: context,
         homeData: homeData,
-      ),
     ),
                                   Container(
                                     height: 50,

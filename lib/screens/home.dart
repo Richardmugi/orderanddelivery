@@ -244,9 +244,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   ),
                                   
       CategoryGrid(
-      isTopCategory: true,         // or false
-      isBaseCategory: true,        // depending on your usage
-      slug: "some-slug",           // optional if not top category
+      is_top_category: true,         // or false
+      is_base_category: true, 
+      slug: '',        // depending on your usage          // optional if not top category
     ),
                                   Container(
                                     height: 50,

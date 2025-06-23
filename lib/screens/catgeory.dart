@@ -20,20 +20,21 @@ import '/l10n/app_localizations.dart';
 import '../../custom/category_item_card_widget.dart';
 
 class CategoryGrid extends StatelessWidget {
-  final bool isTopCategory;
-  final bool isBaseCategory;
+  final bool is_top_category;
+  final bool is_base_category;
   final String? slug;
 
-  const CategoryGrid({
+  CategoryGrid({
     Key? key,
-    required this.isTopCategory,
-    required this.isBaseCategory,
-    this.slug,
+    required this.slug,
+    this.is_base_category = false,
+    this.is_top_category = false,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
-    var data = isTopCategory
+    var data = is_top_category
         ? CategoryRepository().getTopCategories()
         : CategoryRepository().getCategories(parent_id: slug);
 
@@ -43,7 +44,7 @@ class CategoryGrid extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
             child: ShimmerHelper().buildCategoryCardShimmer(
-                is_base_category: isBaseCategory),
+                is_base_category: is_base_category),
           );
         }
         if (snapshot.hasError) {
@@ -58,7 +59,7 @@ class CategoryGrid extends StatelessWidget {
             ),
             itemCount: snapshot.data!.categories!.length,
             padding: EdgeInsets.only(
-                left: 18, right: 18, bottom: isBaseCategory ? 30 : 0),
+                left: 18, right: 18, bottom: is_base_category ? 30 : 0),
             scrollDirection: Axis.vertical,
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -70,7 +71,7 @@ class CategoryGrid extends StatelessWidget {
         } else {
           return SingleChildScrollView(
             child: ShimmerHelper().buildCategoryCardShimmer(
-              is_base_category: isBaseCategory,
+              is_base_category: is_base_category,
             ),
           );
         }

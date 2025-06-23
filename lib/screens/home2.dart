@@ -3,7 +3,6 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/presenter/home_presenter.dart';
-import 'package:active_ecommerce_flutter/screens/catgeory.dart';
 import 'package:active_ecommerce_flutter/screens/filter.dart';
 import 'package:active_ecommerce_flutter/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_flutter/screens/product/todays_deal_products.dart';

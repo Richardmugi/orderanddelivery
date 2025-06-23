@@ -39,25 +39,28 @@ class _CategoryListState extends State<CategoryList> {
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
       child: Stack(children: [
-        Container(
-          height: DeviceInfo(context).height! / 4,
-          width: DeviceInfo(context).width,
-          color: MyTheme.accent_color,
-          alignment: Alignment.topRight,
-          child: Image.asset(
-            "assets/background_1.png",
-          ),
-        ),
+        /*Container(
+  height: DeviceInfo(context).height! / 4,
+  width: DeviceInfo(context).width,
+  alignment: Alignment.topRight,
+  child: SafeArea(
+    child: Image.asset("assets/background_1.png"),
+  ),
+),*/
+
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: PreferredSize(
+          /*appBar: PreferredSize(
             child: buildAppBar(context),
             preferredSize: Size(
               DeviceInfo(context).width!,
               50,
             ),
-          ),
-          body: buildBody(),
+          ),*/
+          body: SafeArea(
+  child: buildBody(),
+),
+
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -89,7 +92,7 @@ class _CategoryListState extends State<CategoryList> {
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
+  /*AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       leading: widget.is_base_category
@@ -115,7 +118,7 @@ class _CategoryListState extends State<CategoryList> {
       elevation: 0.0,
       titleSpacing: 0,
     );
-  }
+  }*/
 
   String getAppBarTitle() {
     String name = widget.is_top_category

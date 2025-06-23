@@ -60,11 +60,11 @@ class _MainState extends State<Main> {
   void initState() {
     _children = [
       Home(),
-      //Home2(),
-      CategoryList(
+      Home2(),
+      /*CategoryList(
         slug: "",
         is_base_category: true,
-      ),
+      ),*/
       Cart(
         has_bottomnav: true,
         from_navigation: true,

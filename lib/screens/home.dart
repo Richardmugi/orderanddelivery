@@ -3,7 +3,7 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/presenter/home_presenter.dart';
-import 'package:active_ecommerce_flutter/screens/catgeory.dart';
+import 'package:active_ecommerce_flutter/screens/category_list_n_product/category_list.dart';
 import 'package:active_ecommerce_flutter/screens/filter.dart';
 import 'package:active_ecommerce_flutter/screens/flash_deal/flash_deal_list.dart';
 import 'package:active_ecommerce_flutter/screens/product/todays_deal_products.dart';
@@ -243,11 +243,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   
-      CategoryGrid(
-      is_top_category: true,         // or false
-      is_base_category: true, 
-      slug: '',        // depending on your usage          // optional if not top category
-    ),
+      SizedBox(
+  height: 400, // give an appropriate fixed height
+  child: CategoryList(
+    slug: "",
+    is_base_category: true,
+  ),
+),
+
                                   Container(
                                     height: 50,
                                   )

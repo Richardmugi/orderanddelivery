@@ -617,7 +617,7 @@ class _ProfileState extends State<Profile> {
             ),
 
           if (is_logged_in.$)
-            Column(
+            /*Column(
               children: [
                 buildBottomVerticalCardListItem("assets/delete.png",
                     LangText(context).local!.delete_my_account, onPressed: () {
@@ -628,7 +628,7 @@ class _ProfileState extends State<Profile> {
                   color: MyTheme.light_grey,
                 ),
               ],
-            ),
+            ),*/
 
           if (false)
             buildBottomVerticalCardListItem(

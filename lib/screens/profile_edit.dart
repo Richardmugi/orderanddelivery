@@ -7,12 +7,16 @@ import 'package:active_ecommerce_flutter/custom/input_decorations.dart';
 import 'package:active_ecommerce_flutter/custom/lang_text.dart';
 import 'package:active_ecommerce_flutter/custom/toast_component.dart';
 import 'package:active_ecommerce_flutter/custom/useful_elements.dart';
+import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/file_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
 import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:route_transitions/route_transitions.dart';
 import '../l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -38,7 +42,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   bool _showPassword = false;
   bool _showConfirmPassword = false;
-
+  late BuildContext loadingcontext;
   //for image uploading
   final ImagePicker _picker = ImagePicker();
   XFile? _file;
@@ -660,7 +664,90 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ),
+          buildBottomVerticalCardListItem("assets/delete.png",
+                    LangText(context).local!.delete_my_account, onPressed: () {
+                  deleteWarningDialog();
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
       ],
     );
   }
+  deleteAccountReq() async {
+    //loading();
+    var response = await AuthRepository().getAccountDeleteResponse();
+
+    if (response.result!) {
+      AuthHelper().clearUserData();
+      Navigator.pop(loadingcontext);
+      context.go("/");
+    }
+    ToastComponent.showDialog(response.message!);
+  }
+
+  deleteWarningDialog() {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(
+                LangText(context).local!.delete_account_warning_title,
+                style: TextStyle(fontSize: 15, color: MyTheme.dark_font_grey),
+              ),
+              content: Text(
+                LangText(context).local!.delete_account_warning_description,
+                style: TextStyle(fontSize: 13, color: MyTheme.dark_font_grey),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      pop(context);
+                    },
+                    child: Text(LangText(context).local!.no_ucf)),
+                TextButton(
+                    onPressed: () {
+                      pop(context);
+                      deleteAccountReq();
+                    },
+                    child: Text(LangText(context).local!.yes_ucf))
+              ],
+            ));
+  }
+
 }
+
+Container buildBottomVerticalCardListItem(String img, String label,
+      {Function()? onPressed, bool isDisable = false}) {
+    return Container(
+      height: 40,
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+            splashFactory: NoSplash.splashFactory,
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 24.0),
+              child: Image.asset(
+                img,
+                height: 16,
+                width: 16,
+                color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
+              ),
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                  fontSize: 12,
+                  color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+

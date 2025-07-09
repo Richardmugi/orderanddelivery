@@ -32,45 +32,36 @@ class CategoryList extends StatefulWidget {
   _CategoryListState createState() => _CategoryListState();
 }
 
-class _CategoryListState extends State<CategoryList> {
+class _CategoryListState extends State<CategoryList> with AutomaticKeepAliveClientMixin {
+  late Future<CategoryResponse> _categoryFuture;
+  @override
+  void initState() {
+    super.initState();
+    _categoryFuture = widget.is_top_category
+        ? CategoryRepository().getTopCategories()
+        : CategoryRepository().getCategories(parent_id: widget.slug);
+  }
+  bool get wantKeepAlive => true; // 🟢 Keeps it alive
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Directionality(
       textDirection:
           app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-      child: Stack(children: [
-        /*Container(
-  height: DeviceInfo(context).height! / 4,
-  width: DeviceInfo(context).width,
-  alignment: Alignment.topRight,
-  child: SafeArea(
-    child: Image.asset("assets/background_1.png"),
-  ),
-),*/
-
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          /*appBar: PreferredSize(
-            child: buildAppBar(context),
-            preferredSize: Size(
-              DeviceInfo(context).width!,
-              50,
-            ),
-          ),*/
-          body: SafeArea(
-  child: buildBody(),
-),
-
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: widget.is_base_category || widget.is_top_category
-              ? Container(
-                  height: 0,
-                )
-              : buildBottomContainer(),
-        )
-      ]),
+      child: Stack(
+        children: [
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            body: SafeArea(child: buildBody()),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: widget.is_base_category || widget.is_top_category
+                ? SizedBox.shrink()
+                : buildBottomContainer(),
+          )
+        ],
+      ),
     );
   }
 
@@ -79,14 +70,10 @@ class _CategoryListState extends State<CategoryList> {
       physics: AlwaysScrollableScrollPhysics(),
       slivers: [
         SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              buildCategoryList(),
-              Container(
-                height: widget.is_base_category ? 60 : 90,
-              )
-            ],
-          ),
+          delegate: SliverChildListDelegate([
+            buildCategoryList(),
+            SizedBox(height: widget.is_base_category ? 60 : 90),
+          ]),
         )
       ],
     );
@@ -128,54 +115,53 @@ class _CategoryListState extends State<CategoryList> {
     return name;
   }
 
-  buildCategoryList() {
-    var data = widget.is_top_category
-        ? CategoryRepository().getTopCategories()
-        : CategoryRepository().getCategories(parent_id: widget.slug);
-    return FutureBuilder(
-      future: data,
-      builder: (context, AsyncSnapshot<CategoryResponse> snapshot) {
-        // if getting response is
+  Widget buildCategoryList() {
+    return FutureBuilder<CategoryResponse>(
+      future: _categoryFuture,
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SingleChildScrollView(
-            child: ShimmerHelper().buildCategoryCardShimmer(
-                is_base_category: widget.is_base_category),
-          );
-        }
-        // if response has issue
-        if (snapshot.hasError) {
-          return Container(
-            height: 10,
-          );
-        } else if (snapshot.hasData) {
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisSpacing: 14,
-              crossAxisSpacing: 14,
-              childAspectRatio: 0.7,
-              crossAxisCount: 3,
-            ),
-            itemCount: snapshot.data!.categories!.length,
-            padding: EdgeInsets.only(
-                left: 18, right: 18, bottom: widget.is_base_category ? 30 : 0),
-            scrollDirection: Axis.vertical,
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return CategoryItemCardWidget(
-                  categoryResponse: snapshot.data!, index: index);
-            },
-          );
-        } else {
           return SingleChildScrollView(
             child: ShimmerHelper().buildCategoryCardShimmer(
               is_base_category: widget.is_base_category,
             ),
           );
         }
+
+        if (snapshot.hasError) {
+          return SizedBox.shrink();
+        }
+
+        if (snapshot.hasData) {
+          final categories = snapshot.data!.categories!;
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 14,
+              crossAxisSpacing: 14,
+              childAspectRatio: 0.7,
+            ),
+            padding: EdgeInsets.only(
+              left: 18,
+              right: 18,
+              bottom: widget.is_base_category ? 30 : 0,
+            ),
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              return CategoryItemCardWidget(
+                categoryResponse: snapshot.data!,
+                index: index,
+              );
+            },
+          );
+        }
+
+        return SizedBox.shrink();
       },
     );
   }
+
 
   Container buildBottomContainer() {
     return Container(

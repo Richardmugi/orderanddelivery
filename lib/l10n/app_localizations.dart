@@ -1256,7 +1256,7 @@ abstract class AppLocalizations {
   /// No description provided for @tax_all_capital.
   ///
   /// In en, this message translates to:
-  /// **'TAX'**
+  /// **'VAT'**
   String get tax_all_capital;
 
   /// No description provided for @shipping_cost_all_capital.
@@ -3170,7 +3170,7 @@ abstract class AppLocalizations {
   /// No description provided for @vat_n_tax_ucf.
   ///
   /// In en, this message translates to:
-  /// **'Vat & Tax'**
+  /// **'VAT'**
   String get vat_n_tax_ucf;
 
   /// No description provided for @product_images_ucf.

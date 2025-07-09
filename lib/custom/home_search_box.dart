@@ -18,7 +18,7 @@ class HomeSearchBox extends StatelessWidget {
         children: [
           // Logo
           Image.asset(
-            "assets/od5.png",
+            "assets/odlogo.jpg",
             height: 50,
           ),
           const SizedBox(width: 50),

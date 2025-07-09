@@ -261,7 +261,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child: buildProductLoadingContainer(homeData))
+                            child: buildProductLoadingContainer(homeData)
+                            )
                       ],
                     );
                   })),

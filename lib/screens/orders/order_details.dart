@@ -773,7 +773,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ),
                       ],
                     )),
-                    Spacer(),
+                    //Spacer(),
                     Btn.basic(
                         // shape: RoundedRectangleBorder(side: Border()),
 
@@ -1412,36 +1412,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                       SizedBox(
                         height: 8,
                       ),
-                      Btn.basic(
-                        // shape: RoundedRectangleBorder(side: Border()),
-
-                        minWidth: 60,
-                        // color: MyTheme.font_grey,
-                        onPressed: () {
-                          _downloadInvoice(_orderDetails!.id);
-                        },
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: MyTheme.medium_grey)),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.file_download_outlined,
-                                color: MyTheme.grey_153,
-                                size: 16,
-                              ),
-                              Text(
-                                LangText(context).local.invoice_ucf,
-                                style: TextStyle(
-                                    color: MyTheme.grey_153, fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ],

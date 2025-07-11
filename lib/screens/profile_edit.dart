@@ -348,6 +348,14 @@ class _ProfileEditState extends State<ProfileEdit> {
           children: [
             buildBasicInfo(context),
             buildChangePassword(context),
+            buildBottomVerticalCardListItem("assets/delete.png",
+                    LangText(context).local!.delete_my_account, onPressed: () {
+                  deleteWarningDialog();
+                }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
           ],
         ),
       ),
@@ -664,17 +672,10 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ),
-          buildBottomVerticalCardListItem("assets/delete.png",
-                    LangText(context).local!.delete_my_account, onPressed: () {
-                  deleteWarningDialog();
-                }),
-                Divider(
-                  thickness: 1,
-                  color: MyTheme.light_grey,
-                ),
       ],
     );
   }
+  
   deleteAccountReq() async {
     //loading();
     var response = await AuthRepository().getAccountDeleteResponse();

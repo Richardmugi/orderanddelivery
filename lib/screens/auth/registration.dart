@@ -14,6 +14,8 @@ import 'package:active_ecommerce_flutter/repositories/auth_repository.dart';
 import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
 import 'package:active_ecommerce_flutter/screens/auth/login.dart';
 import 'package:active_ecommerce_flutter/screens/common_webview_screen.dart';
+import 'package:active_ecommerce_flutter/screens/home.dart';
+import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:active_ecommerce_flutter/ui_elements/auth_ui.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
@@ -188,7 +190,7 @@ class _RegistrationState extends State<Registration> {
         }));
       } else {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Login();
+          return Main();
         }));
       }
     }

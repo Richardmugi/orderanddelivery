@@ -588,7 +588,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get subtotal_all_capital => 'SUB TOTAL';
 
   @override
-  String get tax_all_capital => 'VAT';
+  String get tax_all_capital => 'VAT 15%';
 
   @override
   String get shipping_cost_all_capital => 'SHIPPING COST';
@@ -1545,7 +1545,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cash_on_delivery_ucf => 'Cash on Delivery';
 
   @override
-  String get vat_n_tax_ucf => 'VAT';
+  String get vat_n_tax_ucf => 'VAT 15%';
 
   @override
   String get product_images_ucf => 'Product Images';

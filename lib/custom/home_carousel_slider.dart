@@ -31,7 +31,7 @@ class HomeCarouselSlider extends StatelessWidget {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 338 / 140, // Try 16/9 or 3/2 if still too tall
+              aspectRatio: 580 / 150, // Try 16/9 or 3/2 if still too tall
               viewportFraction: 1.0,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -63,7 +63,7 @@ class HomeCarouselSlider extends StatelessWidget {
                         },
                         child: Container(
                           width: double.infinity,
-                          height: 180,
+                          //height: 400,
                           child: AIZImage.radiusImage(i.photo ?? '', 0,
                               fit: BoxFit.cover),
                         ),

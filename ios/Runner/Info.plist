@@ -143,7 +143,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
-		<string>background-fetch</string>
 		<string>remote-notification</string>
 	</array>
 

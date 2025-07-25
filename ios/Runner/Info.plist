@@ -133,14 +133,17 @@
 	<string>This app will use your motion data for your active tasks</string>
 
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>User can upload and change her profile picture from PhotoLibrary</string>
+	<string>User can upload and change her profile picture from PhotoLibrary and can save invoices</string>
 
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>User can send message or search data by voice</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>We need access to download invoices</string>
 
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>background-fetch</string>
 		<string>remote-notification</string>
 	</array>
 

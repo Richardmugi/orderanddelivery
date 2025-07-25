@@ -658,14 +658,14 @@ class _ProfileState extends State<Profile> {
                 img,
                 height: 16,
                 width: 16,
-                color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey,
+                color: isDisable ? MyTheme.grey_153 : Color(0xFFFAA433),
               ),
             ),
             Text(
               label,
               style: TextStyle(
                   fontSize: 12,
-                  color: isDisable ? MyTheme.grey_153 : MyTheme.dark_font_grey),
+                  color: isDisable ? Color(0xFFFAA433) : Color(0xFFFAA433)),
             ),
           ],
         ),
@@ -704,7 +704,8 @@ class _ProfileState extends State<Profile> {
                   "assets/currency.png",
                   height: 16,
                   width: 16,
-                  color: MyTheme.white,
+                  color: Color(0xFFFAA433)
+,
                 ),
                 SizedBox(
                   height: 5,
@@ -714,7 +715,7 @@ class _ProfileState extends State<Profile> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 10,
-                      color: MyTheme.white,
+                      color: Color(0xFFFAA433),
                       fontWeight: FontWeight.w500),
                 )
               ],
@@ -762,7 +763,7 @@ class _ProfileState extends State<Profile> {
             img,
             height: 16,
             width: 16,
-            color: isLogin ? MyTheme.white : MyTheme.blue_grey,
+            color: isLogin ? Color(0xFFFAA433) : MyTheme.blue_grey,
           ),
           SizedBox(
             height: 5,
@@ -772,7 +773,7 @@ class _ProfileState extends State<Profile> {
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 10,
-                color: isLogin ? MyTheme.white : MyTheme.blue_grey,
+                color: isLogin ? Color(0xFFFAA433) : MyTheme.blue_grey,
                 fontWeight: FontWeight.w500),
           )
         ],
@@ -1006,7 +1007,7 @@ class _ProfileState extends State<Profile> {
               width: 16,
               height: 16,
               color: is_logged_in.$
-                  ? MyTheme.dark_font_grey
+                  ? Color(0xFFFAA433)
                   : MyTheme.medium_grey_50,
             ),
             SizedBox(
@@ -1018,7 +1019,7 @@ class _ProfileState extends State<Profile> {
               maxLines: 1,
               style: TextStyle(
                   color: is_logged_in.$
-                      ? MyTheme.dark_font_grey
+                      ? Color(0xFFFAA433)
                       : MyTheme.medium_grey_50,
                   fontSize: 12),
             )
@@ -1065,7 +1066,7 @@ class _ProfileState extends State<Profile> {
             maxLines: 2,
             style: TextStyle(
                 fontSize: 16,
-                color: MyTheme.dark_font_grey,
+                color: Color(0xFFFAA433),
                 fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -1075,7 +1076,7 @@ class _ProfileState extends State<Profile> {
             title,
             maxLines: 2,
             style: TextStyle(
-              color: MyTheme.dark_font_grey,
+              color: Color(0xFFFAA433),
             ),
           ),
         ],
@@ -1143,7 +1144,7 @@ class _ProfileState extends State<Profile> {
                     ? AppLocalizations.of(context)!.logout_ucf
                     : LangText(context).local!.login_ucf,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFFFAA433),
                     fontSize: 10,
                     fontWeight: FontWeight.w500),
               ),
@@ -1170,7 +1171,7 @@ class _ProfileState extends State<Profile> {
                 "${user_name.$}",
                 style: TextStyle(
                     fontSize: 14,
-                    color: MyTheme.white,
+                    color: Color(0xFFFAA433),
                     fontWeight: FontWeight.w600),
               ),
               Padding(
@@ -1179,7 +1180,7 @@ class _ProfileState extends State<Profile> {
                     //if user email is not available then check user phone if user phone is not available use empty string
                     "${user_email.$ != "" && user_email.$ != null ? user_email.$ : user_phone.$ != "" && user_phone.$ != null ? user_phone.$ : ''}",
                     style: TextStyle(
-                      color: MyTheme.light_grey,
+                      color: Color(0xFFFAA433),
                     ),
                   )),
             ],

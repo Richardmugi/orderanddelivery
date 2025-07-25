@@ -18,7 +18,7 @@ class HomeSearchBox extends StatelessWidget {
         children: [
           // Logo
           Image.asset(
-            "assets/odlogo.jpg",
+            "assets/orderanddelivery2.jpg",
             height: 50,
           ),
           const SizedBox(width: 50),
@@ -29,7 +29,7 @@ class HomeSearchBox extends StatelessWidget {
               AppLocalizations.of(context)!.search_anything,
               style: const TextStyle(
                 fontSize: 16.0,
-                color: Color.fromRGBO(174, 133, 44, 1),
+                color: Color(0xFFFAA433),
               ),
               overflow: TextOverflow.ellipsis,
             ),

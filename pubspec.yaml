@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 # flutter pub upgrade --major-versions
-version: 4.9.9
+version: 4.9.10
 
 environment:
   sdk: ^3.5.0
@@ -128,7 +128,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/odlogo.png"
+  image_path: "assets/orderanddelivery1.jpg"
   min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the

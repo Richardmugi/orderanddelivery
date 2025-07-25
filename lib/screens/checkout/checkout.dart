@@ -1166,7 +1166,7 @@ class _CheckoutState extends State<Checkout> {
                   child: Text(
                     AppLocalizations.of(context)!.see_details_all_lower,
                     style: TextStyle(
-                      color: MyTheme.font_grey,
+                      color: Colors.white,
                       fontSize: 12,
                       decoration: TextDecoration.underline,
                     ),

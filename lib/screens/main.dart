@@ -153,7 +153,7 @@ class _MainState extends State<Main> {
               onTap: onTapped,
               currentIndex: _currentIndex,
               backgroundColor: Colors.white.withOpacity(0.95),
-              unselectedItemColor: Color.fromRGBO(174, 133, 44, 1),
+              unselectedItemColor: Color(0xFFFAA433),
               selectedItemColor: MyTheme.accent_color,
               selectedLabelStyle: TextStyle(
                   fontWeight: FontWeight.w700,

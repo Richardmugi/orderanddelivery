@@ -166,7 +166,7 @@ class _CategoryListState extends State<CategoryList> with AutomaticKeepAliveClie
   Container buildBottomContainer() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color(0xFFFAA433),
       ),
       height: widget.is_base_category ? 0 : 80,
       child: Padding(
@@ -187,7 +187,7 @@ class _CategoryListState extends State<CategoryList> with AutomaticKeepAliveClie
                   child: Text(
                     AppLocalizations.of(context)!.all_products_of_ucf + " ",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Color(0xFFFAA433),
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
                   ),

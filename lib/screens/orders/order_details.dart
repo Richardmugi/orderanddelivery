@@ -19,14 +19,17 @@ import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/system_config.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
+import 'package:active_ecommerce_flutter/presenter/cart_counter.dart';
 import 'package:active_ecommerce_flutter/repositories/order_repository.dart';
 import 'package:active_ecommerce_flutter/repositories/refund_request_repository.dart';
+import 'package:active_ecommerce_flutter/screens/checkout/cart.dart';
 import 'package:active_ecommerce_flutter/screens/checkout/checkout.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:active_ecommerce_flutter/screens/refund_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:provider/provider.dart';
 import '/l10n/app_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -109,7 +112,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       await FlutterDownloader.enqueue(
           url: AppConfig.BASE_URL + "/invoice/download/$id",
           saveInPublicStorage: true,
-          savedDir: folder,
+          savedDir: Platform.isIOS ? (await getApplicationDocumentsDirectory()).path : folder,
           showNotification: true,
           headers: {
             "Authorization": "Bearer ${access_token.$}",
@@ -202,41 +205,61 @@ class _OrderDetailsState extends State<OrderDetails> {
   }
 
   _onPressReorder(id) async {
-    Loading.show(context);
-    var response = await OrderRepository().reOrder(id: id);
-    Loading.close();
-    Widget success = SizedBox.shrink(), failed = SizedBox.shrink();
-    print(response.successMsgs.toString());
-    print(response.failedMsgs.toString());
-    if (response.successMsgs!.isNotEmpty) {
-      success = Text(
-        response.successMsgs?.join("\n") ?? "",
-        style: TextStyle(fontSize: 14, color: MyTheme.green_light),
-      );
-    }
-    if (response.failedMsgs!.isNotEmpty) {
-      failed = Text(
-        response.failedMsgs?.join("\n") ?? "",
-        style: TextStyle(fontSize: 14, color: Colors.red),
-      );
-    }
+  Loading.show(context);
 
-    InfoDialog.show(
-        title: LangText(context).local.info_ucf,
-        content: SizedBox(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              success,
-              SizedBox(
-                height: 3,
-              ),
-              failed
-            ],
-          ),
-        ));
+  var response = await OrderRepository().reOrder(id: id);
+
+  Loading.close();
+
+  Widget success = SizedBox.shrink(), failed = SizedBox.shrink();
+
+  print(response.successMsgs.toString());
+  print(response.failedMsgs.toString());
+
+  if (response.successMsgs!.isNotEmpty) {
+    success = Text(
+      response.successMsgs?.join("\n") ?? "",
+      style: TextStyle(fontSize: 14, color: Colors.green),
+    );
+
+    // ✅ UPDATE CART COUNT
+    Provider.of<CartCounter>(context, listen: false).getCount();
+
+    // ✅ REFRESH PRODUCTS / CART
+    await fetchAll(); // If available globally
+    reset();          // Optional: if needed to clean up states
   }
+
+  if (response.failedMsgs!.isNotEmpty) {
+    failed = Text(
+      response.failedMsgs?.join("\n") ?? "",
+      style: TextStyle(fontSize: 14, color: Colors.red),
+    );
+  }
+
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text("Info"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          success,
+          SizedBox(height: 3),
+          failed,
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("OK"),
+        ),
+      ],
+    ),
+  );
+}
+
 
   _showCancelDialog(id) {
     return ConfirmDialog.show(

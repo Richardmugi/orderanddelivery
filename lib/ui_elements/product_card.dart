@@ -434,6 +434,7 @@ class _ProductCardState extends State<ProductCard>
         );
       },
       child: Container(
+        width: double.infinity,
         decoration: BoxDecorations.buildBoxDecoration_1(),
         child: Stack(
           children: [
@@ -460,7 +461,7 @@ class _ProductCardState extends State<ProductCard>
                 Container(
                   width: double.infinity,
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -470,7 +471,7 @@ class _ProductCardState extends State<ProductCard>
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                            color: MyTheme.font_grey,
+                            color: Color(0xFFFAA433),
                             fontSize: 14,
                             height: 1.2,
                             fontWeight: FontWeight.w400,
@@ -499,7 +500,7 @@ class _ProductCardState extends State<ProductCard>
                           ),
                         )
                       else
-                        SizedBox(height: 8.0),
+                        //SizedBox(height: 8.0),
                       Padding(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                         child: Text(
@@ -521,7 +522,9 @@ class _ProductCardState extends State<ProductCard>
                       ),
 
                       // Quantity buttons
-                      Row(
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           buildQuantityDownButton(),
@@ -538,10 +541,13 @@ class _ProductCardState extends State<ProductCard>
                           buildQuantityUpButton(),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      ),
+                      //const SizedBox(height: 10),
 
                       // Add to cart button
-                      InkWell(
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                      child: InkWell(
                         onTap: () {
                           onPressAddToCart(context, _addedToCartSnackbar);
                         },
@@ -570,6 +576,7 @@ class _ProductCardState extends State<ProductCard>
                           ),
                         ),
                       )
+                      ),
                     ],
                   ),
                 ),

@@ -12,7 +12,7 @@ class MyTheme {
   /*configurable colors ends*/
   /*If you are not a developer, do not change the bottom colors*/
   static const Color white = Colors.white;
-  static Color noColor = Color.fromRGBO(174, 133, 44, 1);
+  static Color noColor = Color(0xFFFAA433);
   static Color light_grey = Color.fromRGBO(239, 239, 239, 1);
   static Color dark_grey = Color.fromRGBO(107, 115, 119, 1);
   static Color medium_grey = Color.fromRGBO(167, 175, 179, 1);
@@ -22,10 +22,10 @@ class MyTheme {
   static Color dark_font_grey = Color.fromRGBO(62, 68, 71, 1);
   static const Color font_grey = Color.fromRGBO(107, 115, 119, 1);
   static const Color textfield_grey = Color.fromRGBO(209, 209, 209, 1);
-  static Color golden = Color.fromRGBO(255, 168, 0, 1);
+  static Color golden = Color(0xFFFAA433);
   static Color amber = Color.fromRGBO(254, 234, 209, 1);
   static Color amber_medium = Color.fromRGBO(254, 240, 215, 1);
-  static Color golden_shadow = Color.fromRGBO(255, 168, 0, .4);
+  static Color golden_shadow = Color(0xFFFAA433);
   static Color green = Colors.green;
   static Color? green_light = Colors.green[200];
   static Color shimmer_base = Colors.grey.shade50;

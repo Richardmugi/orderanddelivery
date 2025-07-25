@@ -32,28 +32,39 @@ class CartProvider extends ChangeNotifier {
   double get cartTotal => _cartTotal;
   String get cartTotalString => _cartTotalString;
 
-  void initState(BuildContext context) {
-    fetchData(context);
-  }
+ // ✅ Rename this to avoid confusion
+void initializeCart(BuildContext context) {
+  fetchData(context);
+}
 
-  void dispose() {
-    _mainScrollController.dispose();
-  }
 
-  void fetchData(BuildContext context) async {
+  @override
+void dispose() {
+  _mainScrollController.dispose();
+  super.dispose();
+}
+
+
+  Future<void> fetchData(BuildContext context) async {
+  try {
     getCartCount(context);
+
     CartResponse cartResponseList =
         await CartRepository().getCartResponseList(user_id.$);
 
-    if (cartResponseList.data != null && cartResponseList.data!.length > 0) {
+    if (cartResponseList.data != null && cartResponseList.data!.isNotEmpty) {
       _shopList = cartResponseList.data!;
       _shopResponse = cartResponseList;
       getSetCartTotal();
     }
-    _isInitial = false;
 
+    _isInitial = false;
     notifyListeners();
+  } catch (e) {
+    debugPrint("Error in fetchData: $e");
   }
+}
+
 
   void getCartCount(BuildContext context) {
     Provider.of<CartCounter>(context, listen: false).getCount();

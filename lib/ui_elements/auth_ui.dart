@@ -44,9 +44,9 @@ class AuthScreen {
                               width: 72,
                               height: 72,
                               decoration: BoxDecoration(
-                                  color: MyTheme.white,
+                                  color: Color.fromRGBO(17, 46, 92, 1),
                                   borderRadius: BorderRadius.circular(8)),
-                              child: Image.asset('assets/odlogo.jpg'),
+                              child: Image.asset('assets/orderanddelivery2.jpg'),
                             ),
                           ],
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -22,27 +22,29 @@ class HomeAllProducts2 extends StatelessWidget {
           child: ShimmerHelper().buildProductGridShimmer(
               scontroller: homeData!.allProductScrollController));
     } else if (homeData!.allProductList.length > 0) {
-      return MasonryGridView.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 14,
-          crossAxisSpacing: 14,
-          itemCount: homeData!.allProductList.length,
-          shrinkWrap: true,
-          padding: EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return ProductCard(
-              id: homeData!.allProductList[index].id,
-              slug: homeData!.allProductList[index].slug,
-              image: homeData!.allProductList[index].thumbnail_image,
-              name: homeData!.allProductList[index].name,
-              main_price: homeData!.allProductList[index].main_price,
-              stroked_price: homeData!.allProductList[index].stroked_price,
-              has_discount: homeData!.allProductList[index].has_discount,
-              discount: homeData!.allProductList[index].discount,
-              is_wholesale: homeData!.allProductList[index].isWholesale,
-            );
-          });
+      return GridView.count(
+  crossAxisCount: 2,
+  crossAxisSpacing: 14,
+  mainAxisSpacing: 14,
+  childAspectRatio: 0.4, // Adjust to get desired height/width
+  physics: NeverScrollableScrollPhysics(),
+  shrinkWrap: true,
+  padding: const EdgeInsets.only(top: 20, bottom: 10, left: 18, right: 18),
+  children: List.generate(homeData!.allProductList.length, (index) {
+    var product = homeData!.allProductList[index];
+    return ProductCard(
+      id: product.id,
+      slug: product.slug,
+      image: product.thumbnail_image,
+      name: product.name,
+      main_price: product.main_price,
+      stroked_price: product.stroked_price,
+      has_discount: product.has_discount,
+      discount: product.discount,
+      is_wholesale: product.isWholesale,
+    );
+  }),
+);
     } else if (homeData!.totalAllProductData == 0) {
       return Center(
           child: Text(AppLocalizations.of(context)!.no_product_is_available));

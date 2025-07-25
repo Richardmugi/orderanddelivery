@@ -34,8 +34,8 @@ class _CartState extends State<Cart> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<CartProvider>(context, listen: false).initState(context);
-    });
+    Provider.of<CartProvider>(context, listen: false).initializeCart(context);
+  });
   }
 
   @override
@@ -112,7 +112,7 @@ class _CartState extends State<Cart> {
                     child: Text(
                       AppLocalizations.of(context)!.total_amount_ucf,
                       style: TextStyle(
-                          color: MyTheme.dark_font_grey,
+                          color: Colors.white,
                           fontSize: 13,
                           fontWeight: FontWeight.w700),
                     ),
@@ -122,7 +122,7 @@ class _CartState extends State<Cart> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(cartProvider.cartTotalString,
                         style: TextStyle(
-                            color: MyTheme.accent_color,
+                            color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600)),
                   ),

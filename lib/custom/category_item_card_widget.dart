@@ -65,7 +65,7 @@ class CategoryItemCardWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
-                      color: MyTheme.font_grey,
+                      color: Color(0xFFFAA433),
                       fontSize: 10,
                       height: 1.6,
                       fontWeight: FontWeight.w600),

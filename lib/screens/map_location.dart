@@ -16,8 +16,9 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker_mb_v2/google_maps_place_picker.dart';
+import 'package:geolocator/geolocator.dart';
 
-class MapLocation extends StatefulWidget {
+/*class MapLocation extends StatefulWidget {
   MapLocation({Key? key, this.address}) : super(key: key);
   var address;
 
@@ -203,6 +204,171 @@ class MapLocationState extends State<MapLocation>
             height: 80,
           );
         }
+      },
+    );
+  }
+}*/
+
+class MapLocation extends StatefulWidget {
+  final dynamic address; // Expecting address object with lat, lang, id, location_available
+
+  const MapLocation({Key? key, this.address}) : super(key: key);
+
+  @override
+  State<MapLocation> createState() => MapLocationState();
+}
+
+class MapLocationState extends State<MapLocation>
+    with SingleTickerProviderStateMixin {
+  PickResult? selectedPlace;
+
+  // Default fallback (Kampala)
+  LatLng kInitialPosition = const LatLng(0.3476, 32.5825);
+
+  @override
+  void initState() {
+    super.initState();
+    _setInitialLocation();
+  }
+
+  /// Determine initial map position
+  Future<void> _setInitialLocation() async {
+    try {
+      // ✅ 1. Try to get device's current location first
+      Position? position = await _determinePosition();
+
+      if (position != null) {
+        kInitialPosition = LatLng(position.latitude, position.longitude);
+      }
+      // ✅ 2. If GPS not available, try saved address coordinates
+      else if (widget.address != null &&
+          widget.address.location_available == true &&
+          widget.address.lat != null &&
+          widget.address.lang != null) {
+        kInitialPosition = LatLng(
+          double.tryParse(widget.address.lat.toString()) ?? 0.0,
+          double.tryParse(widget.address.lang.toString()) ?? 0.0,
+        );
+      }
+      // ✅ 3. Otherwise, default Kampala already set
+    } catch (e) {
+      debugPrint("Error setting initial location: $e");
+    }
+
+    // Refresh map UI
+    if (mounted) setState(() {});
+  }
+
+  /// Request device location
+  Future<Position?> _determinePosition() async {
+    try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) return null;
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied ||
+            permission == LocationPermission.deniedForever) {
+          return null;
+        }
+      }
+
+      return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+    } catch (e) {
+      debugPrint("Error getting location: $e");
+      return null;
+    }
+  }
+
+  /// Update selected location in repository
+  Future<void> onTapPickHere(PickResult? place) async {
+    if (place == null) return;
+
+    final response = await AddressRepository().getAddressUpdateLocationResponse(
+      widget.address?.id,
+      place.geometry?.location.lat ?? 0.0,
+      place.geometry?.location.lng ?? 0.0,
+    );
+
+    ToastComponent.showDialog(response.message);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PlacePicker(
+      hintText: AppLocalizations.of(context)!.your_delivery_location,
+      apiKey: OtherConfig.GOOGLE_MAP_API_KEY,
+      initialPosition: kInitialPosition,
+      useCurrentLocation: false, // We'll handle location manually
+      onPlacePicked: (result) {
+        selectedPlace = result;
+        setState(() {});
+      },
+      selectedPlaceWidgetBuilder:
+          (_, selectedPlace, state, isSearchBarFocused) {
+        return isSearchBarFocused
+            ? const SizedBox.shrink()
+            : FloatingCard(
+                height: 50,
+                bottomPosition: 120.0,
+                leftPosition: 0.0,
+                rightPosition: 0.0,
+                width: 500,
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                child: state == SearchingState.Searching
+                    ? Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.calculating,
+                          style: TextStyle(color: MyTheme.font_grey),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2.0),
+                                  child: Text(
+                                    selectedPlace?.formattedAddress ?? '',
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      color: MyTheme.medium_grey,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Btn.basic(
+                                color: MyTheme.accent_color,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                child: Text(
+                                  AppLocalizations.of(context)!.pick_here,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () => onTapPickHere(selectedPlace),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              );
+      },
+      pinBuilder: (context, state) {
+        return Image.asset(
+          'assets/delivery_map_icon.png',
+          height: state == PinState.Idle ? 60 : 80,
+        );
       },
     );
   }
